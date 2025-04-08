@@ -13,17 +13,22 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-        .package(path: "../FloGraph")
+        .package(url:"https://github.com/kk-0129/FloGraph.git", from: "1.0.0"),
+        //.package(path: "../FloGraph")
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "Flo2D",
-            dependencies: ["FloGraph"]),
+            dependencies: [
+                .product(name: "FloGraph", package: "FloGraph")
+            ]),
         .testTarget(
             name: "Flo2DTests",
-            dependencies: ["Flo2D","FloGraph"]),
+            dependencies: [
+                "Flo2D",
+                .product(name: "FloGraph", package:"FloGraph")
+            ]),
     ]
 )
